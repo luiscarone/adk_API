@@ -31,6 +31,13 @@ from typing import Any, List, Dict, Tuple, Set, Optional
 from collections import defaultdict
 from difflib import get_close_matches
 from mcp.server.fastmcp import FastMCP
+from agents.ui_agent import run_agent as run_ui_agent
+from agents.core_agent import run_agent as run_core_agent
+from agents.fusion_agent import run_agent as run_fusion_agent
+from agents.cam_agent import run_agent as run_cam_agent
+from agents.drawing_agent import run_agent as run_drawing_agent
+from agents.volume_agent import run_agent as run_volume_agent
+from agents.sim_agent import run_agent as run_sim_agent
 
 # Initialize FastMCP server
 mcp = FastMCP("Fusion360 API Server")
@@ -968,6 +975,77 @@ def list_all_classes(module: str = "all") -> str:
     return "\n".join(results)
 
 
+# ============================================================================
+# DOMAIN AGENTS (UI, Core, Fusion, CAM, Drawing, Volume, Simulation)
+# ============================================================================
+
+
+@mcp.tool()
+def ui_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    UI/GUI agent. Surfaces commands, inputs, dialogs, palettes, events from adsk.core/adsk.fusion.
+    Args:
+      task: search term or concept
+      mode: auto|class|method|all
+      limit: max results
+    """
+    return run_ui_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def core_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    Core agent. Focus on adsk.core (UI, geometry, app/doc objects).
+    Args mirror ui_agent.
+    """
+    return run_core_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def fusion_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    Fusion agent. Focus on adsk.fusion (features, components, sketches).
+    Args mirror ui_agent.
+    """
+    return run_fusion_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def cam_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    CAM agent. Focus on adsk.cam (operations, toolpaths, strategies, posting).
+    Args mirror ui_agent.
+    """
+    return run_cam_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def drawing_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    Drawing agent. Focus on adsk.drawing (sheets, views, dimensions).
+    Args mirror ui_agent.
+    """
+    return run_drawing_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def volume_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    Volume/Mesh agent. Focus on adsk.volume (mesh/volume entities).
+    Args mirror ui_agent.
+    """
+    return run_volume_agent({"query": task, "mode": mode, "limit": limit})
+
+
+@mcp.tool()
+def sim_agent(task: str = "", mode: str = "auto", limit: int = 20) -> str:
+    """
+    Simulation agent. Focus on adsk.sim (if available).
+    Args mirror ui_agent.
+    """
+    return run_sim_agent({"query": task, "mode": mode, "limit": limit})
+
+
 @mcp.resource("fusion://full_context")
 def get_full_context() -> str:
     """
@@ -1182,6 +1260,22 @@ def get_server_info() -> str:
     info.append("     list_all_classes()  # All modules")
     info.append("     list_all_classes('core')  # Just core")
 
+    info.append("\n=== Domain Agents (internal, no external calls) ===")
+    info.append("10. ui_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    UI/GUI focus across adsk.core + adsk.fusion (commands, inputs, dialogs, palettes, events)")
+    info.append("11. core_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    Core focus (application, documents, general UI/geometry in adsk.core)")
+    info.append("12. fusion_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    Fusion focus (features, components, sketches in adsk.fusion)")
+    info.append("13. cam_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    CAM focus (operations, toolpaths, strategies, posting in adsk.cam)")
+    info.append("14. drawing_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    Drawing focus (sheets, views, dimensions in adsk.drawing)")
+    info.append("15. volume_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    Volume/Mesh focus (mesh/volume entities in adsk.volume)")
+    info.append("16. sim_agent(task: str, mode: str = 'auto', limit: int = 20)")
+    info.append("    Simulation focus (adsk.sim where available)")
+
     info.append("\n=== Available Resources ===")
     info.append("- fusion://full_context   - ALL modules concatenated (~3.7MB)")
     info.append("- fusion://core           - adsk.core module (916KB)")
@@ -1192,6 +1286,10 @@ def get_server_info() -> str:
     info.append("- fusion://sim            - adsk.sim module (231B)")
     info.append("- fusion://info           - This information page")
     info.append("- fusion://version        - API version information")
+    info.append("- fusion://guide          - Auto-usage guide for this MCP server")
+    info.append("- fusion://guide/ui       - UI/GUI-specific playbook (commands, inputs, dialogs)")
+    info.append("- fusion://guide/cam      - CAM-specific playbook (ops, toolpaths, strategy)")
+    info.append("- fusion://init           - Initialization snippet to set agent defaults in clients")
 
     return "\n".join(info)
 
@@ -1213,6 +1311,121 @@ def get_version_info() -> str:
     info.append("All Python type definitions (.py files) are generated for code intelligence.")
 
     return "\n".join(info)
+
+
+@mcp.resource("fusion://guide")
+def get_usage_guide() -> str:
+    """
+    Auto-usage guide so agents can work without local paths or user hints.
+    Always call these tools/resources before coding Fusion 360 to avoid guessing APIs.
+    """
+    guide = []
+    guide.append("=== Fusion 360 MCP Auto-Usage Guide ===\n")
+    guide.append("Stop guessing Fusion 360 APIs. Use these MCP tools first:\n")
+
+    guide.append("Tools:")
+    guide.append("- explore_ui()  -> full UI/GUI catalog: commands, inputs, dialogs, palettes, events")
+    guide.append("- search_by_category('<ui|geometry|sketch|feature|component|cam|material|document>')")
+    guide.append("               -> discover valid classes for the domain")
+    guide.append("- get_full_class('<ClassName>')  -> entire class definition with module and line")
+    guide.append("- search_api('keyword', max_results=5..10)  -> 10 lines before, 30 after; best for signatures")
+    guide.append("- search_fusion_api('term', modules='all|core|fusion|cam|drawing|volume|sim')")
+    guide.append("               -> symmetric 20/20 context for broad hunts")
+    guide.append("- find_class('<Name>', fuzzy=True)  -> indexed lookup with typo suggestions")
+    guide.append("- find_method('<method>', fuzzy=True) -> classes implementing a method")
+    guide.append("- get_class_hierarchy('<Class>') -> parents/children")
+    guide.append("- list_all_classes('all'|'core'|'fusion'|...) -> inventory for a module")
+
+    guide.append("\nResources:")
+    guide.append("- fusion://core, fusion://fusion, fusion://cam, fusion://drawing, fusion://volume, fusion://sim")
+    guide.append("  -> direct module contents if bulk context is needed")
+    guide.append("- fusion://full_context -> all modules concatenated (~3.7MB) if exhaustive scan is required")
+    guide.append("- fusion://info -> server/tool index")
+    guide.append("- fusion://version -> API version")
+
+    guide.append("\nDefault workflow (follow autonomously):")
+    guide.append("1) If unsure of a name -> search_api('<term>'); if class known -> get_full_class('<Class>').")
+    guide.append("2) UI work -> explore_ui() or search_by_category('ui'), then get_full_class on the chosen input/handler.")
+    guide.append("3) Features/geometry/CAM -> search_by_category('<domain>') to list valid classes, then get_full_class/search_api.")
+    guide.append("4) Only know a concept (e.g., 'extrude') -> search_fusion_api('extrude', modules='fusion').")
+    guide.append("5) Use returned module+line to import correctly; do not invent methods or arguments.")
+
+    guide.append("\nThis guide is part of the MCP server; no local file references are required.")
+
+    return "\n".join(guide)
+
+
+@mcp.resource("fusion://guide/ui")
+def get_ui_guide() -> str:
+    """
+    UI/GUI-focused guide. Designed so agents default to the MCP index for any interface task.
+    """
+    guide = []
+    guide.append("=== Fusion 360 UI/GUI Playbook ===\n")
+    guide.append("Use these MCP tools before writing UI code:\n")
+    guide.append("- explore_ui() -> full UI catalog (commands, inputs, dialogs, palettes, events, graphics)")
+    guide.append("- search_by_category('ui') -> list all UI classes if you need a menu of options")
+    guide.append("- get_full_class('<UIClass>') -> complete class definition with module+line")
+    guide.append("- search_api('<term>', max_results=5..10) -> find signatures/arguments (10 before/30 after)")
+    guide.append("- search_fusion_api('<term>', modules='core,fusion') -> broader search for UI terms")
+    guide.append("- find_class('<Name>', fuzzy=True) -> typo-tolerant lookup of UI classes")
+    guide.append("- find_method('<method>', fuzzy=True) -> find inputs/handlers implementing a method\n")
+    guide.append("Workflow (follow automatically):")
+    guide.append("1) Need to build a command UI? -> explore_ui() then get_full_class on chosen input types.")
+    guide.append("2) Unsure about an input/handler signature? -> search_api('<InputName>') or get_full_class.")
+    guide.append("3) Events/handlers -> search_api('EventHandler') or find_method('commandCreated').")
+    guide.append("4) HTML/Palette needs -> search_api('HTML') then get_full_class('HTMLEvent', 'HTMLPalette', etc).")
+    guide.append("5) Use returned module+line for correct imports; do not invent methods/args.")
+    guide.append("\nResources if bulk context needed: fusion://core (UI types), fusion://fusion (design UI pieces).")
+    return "\n".join(guide)
+
+
+@mcp.resource("fusion://guide/cam")
+def get_cam_guide() -> str:
+    """
+    CAM-focused guide. Keeps agents aligned with CAM API definitions.
+    """
+    guide = []
+    guide.append("=== Fusion 360 CAM Playbook ===\n")
+    guide.append("Use these MCP tools before CAM coding:\n")
+    guide.append("- search_by_category('cam') -> list all CAM classes (operations, setups, tools, toolpaths, posts)")
+    guide.append("- get_full_class('<CamClass>') -> full definition with module+line")
+    guide.append("- search_api('<term>', max_results=5..10) -> signatures (10 before/30 after) for operations/toolpaths")
+    guide.append("- search_fusion_api('<term>', modules='cam') -> broad CAM search (strategies, NCProgram, post)")
+    guide.append("- find_class('<Name>', fuzzy=True) / find_method('<method>', fuzzy=True) -> typo-safe lookup\n")
+    guide.append("Workflow (follow automatically):")
+    guide.append("1) New CAM flow? -> search_by_category('cam') to choose proper classes (Setup, Operation, Toolpath).")
+    guide.append("2) Need creation signatures? -> search_api('create', max_results=10) within CAM, then get_full_class.")
+    guide.append("3) Strategies/toolpaths -> search_api('Strategy') or search_fusion_api('toolpath', modules='cam').")
+    guide.append("4) Posting/NC -> search_api('post') / get_full_class('NCProgram') / get_full_class('PostProcessParameters').")
+    guide.append("5) Use module+line from results; do not guess args or property names.")
+    guide.append("\nResources if bulk context needed: fusion://cam (CAM module), fusion://fusion (design links), fusion://full_context for exhaustive scans.")
+    return "\n".join(guide)
+
+
+@mcp.resource("fusion://init")
+def get_init_instructions() -> str:
+    """
+    Initialization message for clients that support /init or startup resources.
+    Agents should read this at session start to set defaults.
+    """
+    lines = []
+    lines.append("=== Fusion 360 MCP Init ===")
+    lines.append("Defaults: use MCP tools/agents before writing Fusion code; never guess APIs.")
+    lines.append("")
+    lines.append("Primary tools:")
+    lines.append("- ui_agent(task, mode='auto', limit=20) -> UI/GUI in adsk.core+fusion")
+    lines.append("- fusion_agent(task, mode, limit) -> Features/components/sketches")
+    lines.append("- cam_agent(task, mode, limit) -> CAM ops/toolpaths/strategies/post")
+    lines.append("- core_agent / drawing_agent / volume_agent / sim_agent for their domains")
+    lines.append("- search_api('keyword') for signatures (10 before/30 after)")
+    lines.append("- get_full_class('ClassName') for complete definitions with module+line")
+    lines.append("- search_by_category('ui|geometry|sketch|feature|component|cam|material|document')")
+    lines.append("- explore_ui() for full UI catalog")
+    lines.append("")
+    lines.append("Resources: fusion://info, fusion://guide, fusion://guide/ui, fusion://guide/cam")
+    lines.append("Import modules as returned by tools (use module+line); do not invent methods/args.")
+    return "\n".join(lines)
 
 
 if __name__ == "__main__":

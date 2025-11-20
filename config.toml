@@ -1,0 +1,46 @@
+# Fusion 360 MCP Server Configuration for Codex / VSCode
+#
+# This configuration file uses TOML format for Codex and compatible MCP clients
+# Place this file in your Codex workspace or copy the content to your config.toml
+#
+# For WSL users: This configuration automatically handles WSL paths
+# For native Linux: Replace "wsl" command with direct paths
+
+# CORRECT Configuration for MCP (use direct python, not start.sh)
+# start.sh is too verbose and interferes with MCP stdio protocol
+
+[mcp_servers."fusion360-api"]
+command = "wsl"
+args = ["bash", "-c", "cd /home/lulubas/TOOLS/adk_API && source venv/bin/activate && exec python fusion_mcp_server.py"]
+# The Fusion server can take a bit to spin up, so extend the startup timeout
+startup_timeout_sec = 45
+
+# Alternative for native Linux/macOS (without WSL):
+# [mcpServers."fusion360-api"]
+# command = "/home/lulubas/TOOLS/adk_API/venv/bin/python"
+# args = ["/home/lulubas/TOOLS/adk_API/fusion_mcp_server.py"]
+# disabled = false
+# autoApprove = []
+
+# Server Information:
+# - Name: Fusion 360 API Server
+# - Version: 2.1
+# - Tools: 9 intelligent tools
+# - Resources: 9 resources
+# - API Coverage: ~89,000 lines (7 modules)
+#
+# Available Tools:
+# 1. explore_ui() - Discover all UI/GUI classes
+# 2. search_by_category() - Search by semantic category
+# 3. get_full_class() - Extract complete class definition
+# 4. search_api() - Smart search (10+30 context)
+# 5. search_fusion_api() - General search (20+20 context)
+# 6. find_class() - Fast lookup with fuzzy search (v2.1)
+# 7. find_method() - Find method across all classes (v2.1)
+# 8. get_class_hierarchy() - Show inheritance tree (v2.1)
+# 9. list_all_classes() - Instant class listing (v2.1)
+#
+# For more information, see:
+# - QUICK_REFERENCE.md
+# - README_MCP.md
+# - MCP_SETUP_GUIDE.md

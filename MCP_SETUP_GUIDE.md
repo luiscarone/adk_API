@@ -127,6 +127,38 @@ cp mcp_config_vscode.json /path/to/your/project/.vscode/mcp_config.json
 
 ---
 
+### For Codex (using config.toml)
+
+**File:** `config.toml` (in your Codex workspace)
+
+```toml
+[mcpServers."fusion360-api"]
+command = "wsl"
+args = [
+  "bash",
+  "-c",
+  "cd /home/lulubas/TOOLS/adk_API && ./start.sh"
+]
+disabled = false
+autoApprove = []
+```
+
+**Alternative for native Linux/macOS (without WSL):**
+```toml
+[mcpServers."fusion360-api"]
+command = "/home/lulubas/TOOLS/adk_API/venv/bin/python"
+args = ["/home/lulubas/TOOLS/adk_API/fusion_mcp_server.py"]
+disabled = false
+autoApprove = []
+```
+
+**Or copy the provided config:**
+```bash
+cp config.toml /path/to/your/codex/workspace/
+```
+
+---
+
 ### For Cline (VSCode Extension)
 
 **File:** `~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json`
@@ -165,6 +197,33 @@ cp mcp_config_vscode.json /path/to/your/project/.vscode/mcp_config.json
   }
 }
 ```
+
+---
+
+### For Gemini (via MCP Gateway)
+
+**Note:** Google Gemini does not natively support MCP, so you'll need a gateway/proxy.
+
+**Setup Steps:**
+
+1. **Install MCP Gateway** (optional third-party tool):
+   ```bash
+   # Example using a hypothetical MCP-to-API gateway
+   npm install -g mcp-gateway
+   ```
+
+2. **Configure Gateway:**
+   ```bash
+   mcp-gateway configure --server fusion360-api \
+     --command "/home/lulubas/TOOLS/adk_API/venv/bin/python" \
+     --args "/home/lulubas/TOOLS/adk_API/fusion_mcp_server.py" \
+     --port 8080
+   ```
+
+3. **Connect Gemini:**
+   Point Gemini API client to the gateway endpoint: `http://localhost:8080`
+
+**Alternative:** Use Gemini through compatible MCP clients (Claude Code, Cursor, etc.) that support model switching.
 
 ---
 

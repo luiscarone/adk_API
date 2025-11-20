@@ -104,6 +104,94 @@ echo -e "  Command: ${YELLOW}python${NC}"
 echo -e "  Script:  ${YELLOW}$SCRIPT_DIR/fusion_mcp_server.py${NC}"
 echo -e "  Venv:    ${YELLOW}$SCRIPT_DIR/venv/bin/python${NC}"
 echo ""
+echo -e "${BLUE}╔═══════════════════════════════════════════════════════════════════════╗${NC}"
+echo -e "${BLUE}║              HOW TO CONFIGURE FOR DIFFERENT AI AGENTS                 ║${NC}"
+echo -e "${BLUE}╚═══════════════════════════════════════════════════════════════════════╝${NC}"
+echo ""
+echo -e "${GREEN}1. Claude Code${NC}"
+echo -e "   ${YELLOW}File:${NC} ~/.config/claude-code/mcp_config.json"
+echo -e "   ${BLUE}Config:${NC}"
+echo -e '   {
+     "mcpServers": {
+       "fusion360-api": {
+         "command": "'$SCRIPT_DIR'/venv/bin/python",
+         "args": ["'$SCRIPT_DIR'/fusion_mcp_server.py"],
+         "env": {}
+       }
+     }
+   }'
+echo ""
+echo -e "${GREEN}2. Codex / VSCode ${RED}(⚠️  Use python directly, NOT this script!)${NC}"
+echo -e "   ${YELLOW}Method 1 (CLI):${NC}"
+echo -e "   codex mcp add fusion360-api -- \\"
+echo -e "     $SCRIPT_DIR/venv/bin/python \\"
+echo -e "     $SCRIPT_DIR/fusion_mcp_server.py"
+echo ""
+echo -e "   ${YELLOW}Method 2 (config.toml - For WSL):${NC}"
+echo -e '   [mcpServers."fusion360-api"]
+   command = "wsl"
+   args = [
+     "bash", "-c",
+     "cd '$SCRIPT_DIR' && source venv/bin/activate && python fusion_mcp_server.py"
+   ]'
+echo -e "   ${RED}IMPORTANT: Run python script directly, NOT ./start.sh${NC}"
+echo -e "   ${RED}(start.sh output breaks MCP stdio protocol)${NC}"
+echo ""
+echo -e "${GREEN}3. VSCode with MCP Extension${NC}"
+echo -e "   ${YELLOW}File:${NC} .vscode/mcp_config.json (in project root)"
+echo -e "   ${BLUE}Config:${NC}"
+echo -e '   {
+     "mcpServers": {
+       "fusion360-api": {
+         "command": "'$SCRIPT_DIR'/venv/bin/python",
+         "args": ["'$SCRIPT_DIR'/fusion_mcp_server.py"],
+         "env": {"PYTHONUNBUFFERED": "1"}
+       }
+     }
+   }'
+echo ""
+echo -e "${GREEN}4. Cline (VSCode Extension)${NC}"
+echo -e "   ${YELLOW}File (Linux):${NC} ~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+echo -e "   ${YELLOW}File (macOS):${NC} ~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json"
+echo -e "   ${BLUE}Config:${NC}"
+echo -e '   {
+     "mcpServers": {
+       "fusion360-api": {
+         "command": "'$SCRIPT_DIR'/venv/bin/python",
+         "args": ["'$SCRIPT_DIR'/fusion_mcp_server.py"]
+       }
+     }
+   }'
+echo ""
+echo -e "${GREEN}5. Cursor${NC}"
+echo -e "   ${YELLOW}File:${NC} ~/.cursor/mcp.json"
+echo -e "   ${BLUE}Config:${NC}"
+echo -e '   {
+     "mcpServers": {
+       "fusion360-api": {
+         "command": "'$SCRIPT_DIR'/venv/bin/python",
+         "args": ["'$SCRIPT_DIR'/fusion_mcp_server.py"],
+         "env": {}
+       }
+     }
+   }'
+echo ""
+echo -e "${GREEN}6. Google Gemini (via MCP Gateway)${NC}"
+echo -e "   ${YELLOW}Note:${NC} Gemini requires an MCP-to-API gateway"
+echo -e "   ${BLUE}Setup:${NC}"
+echo -e "   1. Use MCP Gateway: https://github.com/modelcontextprotocol/gateway"
+echo -e "   2. Configure gateway to point to: $SCRIPT_DIR/venv/bin/python $SCRIPT_DIR/fusion_mcp_server.py"
+echo -e "   3. Connect Gemini to the gateway endpoint"
+echo ""
+echo -e "${YELLOW}TIP:${NC} Pre-configured files available:"
+echo -e "  ${BLUE}•${NC} mcp_config_claude_code.json"
+echo -e "  ${BLUE}•${NC} mcp_config_vscode.json"
+echo -e "  ${BLUE}•${NC} mcp_config_generic.json"
+echo -e "  ${BLUE}•${NC} mcp_config_windows.json"
+echo ""
+echo -e "${YELLOW}For WSL users:${NC} Replace paths with '/home/lulubas/TOOLS/adk_API/...'"
+echo -e "${YELLOW}For Windows:${NC} Replace paths with 'C:\\\\Users\\\\...\\\\adk_API\\\\...'"
+echo ""
 echo -e "${GREEN}Available Tools (9 total):${NC}"
 echo -e "  ${BLUE}v2.0 Tools:${NC}"
 echo -e "  ${BLUE}1.${NC} explore_ui()             - Discover all UI/GUI classes"

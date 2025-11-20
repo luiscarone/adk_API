@@ -1,0 +1,4 @@
+[mcp_servers."fusion360-api"]
+command = "wsl"
+args = ["bash", "-c", "cd /home/lulubas/TOOLS/adk_API && source venv/bin/activate && exec python fusion_mcp_server.py"]
+startup_timeout_sec = 45

@@ -14,7 +14,11 @@
 | Documento | Descrição | Para Quem |
 |-----------|-----------|-----------|
 | **[QUICK_REFERENCE.md](QUICK_REFERENCE.md)** | Guia rápido de 5 minutos | Início rápido |
+| **[WORKING_STATUS.md](WORKING_STATUS.md)** | Status de compatibilidade com AI agents | Ver o que funciona |
+| **[CODEX_SETUP.md](CODEX_SETUP.md)** | Setup para Codex (experimental) | Usuários Codex |
+| **[CONFIG_EXAMPLES.md](CONFIG_EXAMPLES.md)** | Configurações para diferentes AI agents | Configurar MCP |
 | **[README_MCP.md](README_MCP.md)** | Documentação completa | Referência detalhada |
+| **[MCP_SETUP_GUIDE.md](MCP_SETUP_GUIDE.md)** | Guia completo de instalação | Setup detalhado |
 | **[CHANGELOG.md](CHANGELOG.md)** | Novidades da v2.0 | Ver mudanças |
 | **[SUMMARY.md](SUMMARY.md)** | Resumo executivo | Visão geral |
 | **[test_examples.py](test_examples.py)** | Exemplos práticos | Aprender usando |
