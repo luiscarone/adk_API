@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {},
+      "description": "Fusion 360 API Server v2.0 - Complete documentation with 5 intelligent tools"
+    }
+  }
+}

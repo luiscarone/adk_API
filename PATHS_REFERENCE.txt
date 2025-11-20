@@ -1,0 +1,310 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║              FUSION 360 MCP SERVER - PATHS REFERENCE                          ║
+║                         Quick Copy & Paste                                    ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📁 INSTALLATION DIRECTORY                                                     │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+/home/lubas/TOOLS/adk_API
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🐍 PYTHON INTERPRETER (Virtual Environment)                                   │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+/home/lubas/TOOLS/adk_API/venv/bin/python
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📜 SERVER SCRIPT                                                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+/home/lubas/TOOLS/adk_API/fusion_mcp_server.py
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📚 API FILES LOCATION                                                          │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+/home/lubas/TOOLS/adk_API/API/Python/defs/adsk/
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⚙️ MCP CONFIGURATION - CLAUDE CODE                                            │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Config File Location:
+~/.config/claude-code/mcp_config.json
+
+Config Content:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {}
+    }
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⚙️ MCP CONFIGURATION - VSCODE                                                 │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Config File Location:
+.vscode/mcp_config.json (in your project root)
+
+Config Content:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⚙️ MCP CONFIGURATION - CLINE (VSCode Extension)                               │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Config File Location (Linux):
+~/.config/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+
+Config File Location (Mac):
+~/Library/Application Support/Code/User/globalStorage/saoudrizwan.claude-dev/settings/cline_mcp_settings.json
+
+Config Content:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ]
+    }
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⚙️ MCP CONFIGURATION - CURSOR                                                 │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Config File Location:
+~/.cursor/mcp.json
+
+Config Content:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {}
+    }
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⚙️ MCP CONFIGURATION - WINDOWS                                                │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Python Interpreter:
+C:\Users\YourUser\TOOLS\adk_API\venv\Scripts\python.exe
+
+Server Script:
+C:\Users\YourUser\TOOLS\adk_API\fusion_mcp_server.py
+
+Config Content:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "C:\\Users\\YourUser\\TOOLS\\adk_API\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\YourUser\\TOOLS\\adk_API\\fusion_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
+
+NOTE: Replace "YourUser" with your actual Windows username
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🛠️ INSTALLATION COMMANDS                                                      │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+# Install
+cd /home/lubas/TOOLS/adk_API
+./install.sh
+
+# Test Installation
+./test_installation.sh
+
+# Start Server
+./start.sh
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🔍 VERIFICATION COMMANDS                                                       │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+# Check Python version
+python3 --version
+
+# Check venv exists
+ls -la /home/lubas/TOOLS/adk_API/venv
+
+# Check venv Python
+/home/lubas/TOOLS/adk_API/venv/bin/python --version
+
+# Test MCP import
+/home/lubas/TOOLS/adk_API/venv/bin/python -c "import mcp; print('OK')"
+
+# Test FastMCP import
+/home/lubas/TOOLS/adk_API/venv/bin/python -c "from mcp.server.fastmcp import FastMCP; print('OK')"
+
+# Check API files
+ls -la /home/lubas/TOOLS/adk_API/API/Python/defs/adsk/
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📦 KEY FILES IN PROJECT                                                        │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Installation & Runtime:
+  /home/lubas/TOOLS/adk_API/install.sh
+  /home/lubas/TOOLS/adk_API/start.sh
+  /home/lubas/TOOLS/adk_API/test_installation.sh
+  /home/lubas/TOOLS/adk_API/fusion_mcp_server.py
+  /home/lubas/TOOLS/adk_API/requirements.txt
+
+Documentation:
+  /home/lubas/TOOLS/adk_API/README.md
+  /home/lubas/TOOLS/adk_API/README_MCP.md
+  /home/lubas/TOOLS/adk_API/QUICK_REFERENCE.md
+  /home/lubas/TOOLS/adk_API/MCP_SETUP_GUIDE.md
+  /home/lubas/TOOLS/adk_API/INSTALLATION.md
+  /home/lubas/TOOLS/adk_API/CHANGELOG.md
+  /home/lubas/TOOLS/adk_API/SUMMARY.md
+
+Configuration Templates:
+  /home/lubas/TOOLS/adk_API/mcp_config_claude_code.json
+  /home/lubas/TOOLS/adk_API/mcp_config_vscode.json
+  /home/lubas/TOOLS/adk_API/mcp_config_generic.json
+  /home/lubas/TOOLS/adk_API/mcp_config_windows.json
+
+Examples:
+  /home/lubas/TOOLS/adk_API/test_examples.py
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🚀 QUICK START COPY-PASTE                                                     │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+# Full setup in 3 commands:
+cd /home/lubas/TOOLS/adk_API && ./install.sh && ./test_installation.sh && ./start.sh
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📋 COPY-PASTE CONFIG FOR CLAUDE CODE                                          │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+# Copy config to Claude Code:
+cp /home/lubas/TOOLS/adk_API/mcp_config_claude_code.json ~/.config/claude-code/mcp_config.json
+
+# Or manually create ~/.config/claude-code/mcp_config.json with:
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": ["/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"],
+      "env": {}
+    }
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🔄 ENVIRONMENT VARIABLES (Optional)                                            │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Add to "env" section in MCP config:
+
+{
+  "env": {
+    "PYTHONUNBUFFERED": "1",                 # Recommended: Disable buffering
+    "FUSION_API_PATH": "/custom/path",       # Optional: Custom API path
+    "MCP_DEBUG": "1"                         # Optional: Enable debug mode
+  }
+}
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 💡 TROUBLESHOOTING PATHS                                                       │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+If server won't start, verify these paths exist:
+
+1. Virtual environment:
+   ls -la /home/lubas/TOOLS/adk_API/venv/bin/python
+
+2. Server script:
+   ls -la /home/lubas/TOOLS/adk_API/fusion_mcp_server.py
+
+3. API files:
+   ls -la /home/lubas/TOOLS/adk_API/API/Python/defs/adsk/core.py
+
+4. Test MCP packages:
+   /home/lubas/TOOLS/adk_API/venv/bin/python -c "import mcp; print('OK')"
+
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📊 SERVER STATISTICS                                                           │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Server Version:         2.0
+API Version:            Fusion 360 v2605.1.18
+Server Size:            29.6 KB (~800 lines)
+API Coverage:           3.7 MB (89,000 lines)
+Modules Indexed:        7 (core, fusion, cam, drawing, volume, sim, init)
+Tools Available:        5 (explore_ui, search_by_category, get_full_class,
+                           search_api, search_fusion_api)
+Resources Available:    9 (fusion://info, fusion://version, fusion://core, etc)
+Categories:             8 (ui, geometry, sketch, feature, component, cam,
+                           material, document)
+Keywords Indexed:       60+ (40+ UI-specific)
+
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║                          READY TO USE!                                        ║
+║                                                                               ║
+║  1. Run: ./install.sh                                                         ║
+║  2. Test: ./test_installation.sh                                              ║
+║  3. Copy config to your MCP client                                            ║
+║  4. Start: ./start.sh                                                         ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Last Updated: 2025
+Status: Production Ready ✅

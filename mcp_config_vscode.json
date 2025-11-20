@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}

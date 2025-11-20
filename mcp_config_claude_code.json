@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "/home/lubas/TOOLS/adk_API/venv/bin/python",
+      "args": [
+        "/home/lubas/TOOLS/adk_API/fusion_mcp_server.py"
+      ],
+      "env": {},
+      "metadata": {
+        "name": "Fusion 360 API Server",
+        "version": "2.0",
+        "description": "Complete Fusion 360 API documentation server with intelligent search and UI discovery",
+        "author": "Fusion 360 MCP Team",
+        "capabilities": [
+          "explore_ui() - Discover all UI/GUI classes",
+          "search_by_category() - Semantic category search",
+          "get_full_class() - Extract complete classes",
+          "search_api() - Smart search (10+30 context)",
+          "search_fusion_api() - General search"
+        ]
+      }
+    }
+  }
+}

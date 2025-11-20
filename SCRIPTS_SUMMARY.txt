@@ -1,0 +1,334 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║              FUSION 360 MCP SERVER - INSTALLATION SCRIPTS                     ║
+║                       Complete Setup System                                   ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🎯 WHAT WAS CREATED                                                           │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+✅ 3 EXECUTABLE SCRIPTS:
+   • install.sh              - Automated installation
+   • start.sh                - Server startup with checks
+   • test_installation.sh    - Installation verification
+
+✅ 5 CONFIGURATION FILES:
+   • mcp_config_claude_code.json  - Claude Code config
+   • mcp_config_vscode.json       - VSCode config
+   • mcp_config_generic.json      - Generic MCP client
+   • mcp_config_windows.json      - Windows paths
+   • PATHS_REFERENCE.txt          - All paths for copy-paste
+
+✅ 3 DOCUMENTATION FILES:
+   • MCP_SETUP_GUIDE.md      - Complete setup guide
+   • INSTALLATION.md         - Installation details
+   • SCRIPTS_SUMMARY.txt     - This file
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🚀 QUICK START (Copy-Paste These 3 Commands)                                 │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+cd /home/lubas/TOOLS/adk_API
+./install.sh
+./start.sh
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📜 SCRIPT 1: install.sh                                                       │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+PURPOSE:
+  Automated installation of virtual environment and dependencies
+
+WHAT IT DOES:
+  [1/5] Check Python 3.8+ installed
+  [2/5] Create virtual environment in venv/
+  [3/5] Activate virtual environment
+  [4/5] Upgrade pip to latest
+  [5/5] Install fastmcp and mcp packages
+
+USAGE:
+  ./install.sh
+
+FEATURES:
+  ✓ Colorful output with progress indicators
+  ✓ Error checking at each step
+  ✓ Verification of installation
+  ✓ Shows next steps when done
+  ✓ Safe to run multiple times (recreates venv)
+
+OUTPUT:
+  Creates venv/ directory with all dependencies installed
+
+TIME:
+  ~30-60 seconds depending on internet speed
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📜 SCRIPT 2: start.sh                                                         │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+PURPOSE:
+  Start the MCP server with proper environment and checks
+
+WHAT IT DOES:
+  [1/3] Activate virtual environment
+  [2/3] Verify MCP packages installed
+  [3/3] Check API files present
+  Then: Start fusion_mcp_server.py
+
+USAGE:
+  ./start.sh
+
+FEATURES:
+  ✓ Clears screen for clean output
+  ✓ Shows server location and paths
+  ✓ Verifies dependencies before starting
+  ✓ Displays available tools and resources
+  ✓ Graceful shutdown with Ctrl+C
+
+OUTPUT:
+  Server runs and listens for MCP connections
+
+STOP SERVER:
+  Press Ctrl+C
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📜 SCRIPT 3: test_installation.sh                                             │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+PURPOSE:
+  Verify that everything is properly installed
+
+WHAT IT DOES:
+  Runs 10 tests:
+  [TEST 1/10]  Python version (3.8+)
+  [TEST 2/10]  Virtual environment exists
+  [TEST 3/10]  Venv Python works
+  [TEST 4/10]  Server script exists
+  [TEST 5/10]  Requirements file exists
+  [TEST 6/10]  MCP package installed
+  [TEST 7/10]  FastMCP package installed
+  [TEST 8/10]  API directory structure
+  [TEST 9/10]  Critical API files (core, fusion, cam)
+  [TEST 10/10] Scripts are executable
+
+USAGE:
+  ./test_installation.sh
+
+FEATURES:
+  ✓ Comprehensive 10-point check
+  ✓ Pass/Fail summary at end
+  ✓ Suggests fixes for failed tests
+  ✓ Exit code 0 if all pass, 1 if any fail
+
+OUTPUT:
+  Test results with Pass/Fail count
+
+TIME:
+  ~5-10 seconds
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🔧 CONFIGURATION FILES                                                         │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+FILE: mcp_config_claude_code.json
+  For: Claude Code
+  Copy to: ~/.config/claude-code/mcp_config.json
+  Command: cp mcp_config_claude_code.json ~/.config/claude-code/mcp_config.json
+
+FILE: mcp_config_vscode.json
+  For: VSCode with MCP extension
+  Copy to: .vscode/mcp_config.json (in project root)
+  Command: cp mcp_config_vscode.json /path/to/project/.vscode/
+
+FILE: mcp_config_generic.json
+  For: Any MCP client
+  Generic configuration with standard paths
+  Customize as needed for your client
+
+FILE: mcp_config_windows.json
+  For: Windows users
+  Update paths:
+    - Change YourUser to your username
+    - Update drive letter if needed (C:\ to D:\ etc)
+
+FILE: PATHS_REFERENCE.txt
+  For: Quick copy-paste reference
+  Contains all paths and configs ready to copy
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📚 DOCUMENTATION FILES                                                         │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+FILE: MCP_SETUP_GUIDE.md
+  Complete setup guide for all MCP clients
+  Includes:
+    - Claude Code setup
+    - VSCode setup
+    - Cline setup
+    - Cursor setup
+    - Windows instructions
+    - Troubleshooting
+
+FILE: INSTALLATION.md
+  Detailed installation documentation
+  Includes:
+    - Script usage details
+    - Manual installation steps
+    - Common issues and fixes
+    - System requirements
+    - Verification checklist
+
+FILE: PATHS_REFERENCE.txt
+  Quick reference for all paths
+  Includes:
+    - Server paths
+    - Config examples for each client
+    - Verification commands
+    - Copy-paste configs
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🎯 RECOMMENDED WORKFLOW                                                        │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+FIRST TIME SETUP:
+
+  1. Run installation:
+     ./install.sh
+
+  2. Verify installation:
+     ./test_installation.sh
+
+  3. Copy config to your MCP client:
+     # For Claude Code:
+     cp mcp_config_claude_code.json ~/.config/claude-code/mcp_config.json
+     
+     # For VSCode:
+     cp mcp_config_vscode.json /your/project/.vscode/
+     
+     # For others: see MCP_SETUP_GUIDE.md
+
+  4. Start server:
+     ./start.sh
+
+  5. Restart your MCP client to load the server
+
+DAILY USAGE:
+
+  1. Start server:
+     ./start.sh
+
+  2. Use in your MCP client
+     - explore_ui()
+     - search_by_category("ui")
+     - get_full_class("CommandInput")
+     - etc.
+
+  3. Stop server when done:
+     Ctrl+C
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🔍 VERIFICATION CHECKLIST                                                      │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+After running install.sh, verify:
+
+  [ ] venv/ directory created
+  [ ] venv/bin/python exists
+  [ ] ./test_installation.sh shows 10/10 passed
+  [ ] MCP config copied to client location
+  [ ] Paths in config match your system
+  [ ] ./start.sh starts server without errors
+  [ ] Client shows "fusion360-api" server
+  [ ] Can call explore_ui() or fusion://info
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 🐛 TROUBLESHOOTING                                                             │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+PROBLEM: Scripts won't execute
+SOLUTION: chmod +x install.sh start.sh test_installation.sh
+
+PROBLEM: Python version too old
+SOLUTION: Install Python 3.8+ first
+
+PROBLEM: venv not created
+SOLUTION: Install python3-venv package
+          sudo apt install python3-venv (Ubuntu/Debian)
+
+PROBLEM: MCP packages fail to install
+SOLUTION: Check internet connection
+          Try: pip install fastmcp mcp --verbose
+
+PROBLEM: Server won't start
+SOLUTION: Run ./test_installation.sh to diagnose
+          Check output for specific error
+
+PROBLEM: Client can't find server
+SOLUTION: Verify paths in mcp config match your system
+          Check PATHS_REFERENCE.txt for correct paths
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ 📊 FILE SIZES                                                                  │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+Scripts:
+  install.sh              ~5.2 KB
+  start.sh                ~4.8 KB
+  test_installation.sh    ~6.4 KB
+
+Configs:
+  mcp_config_*.json       ~200-400 bytes each
+
+Docs:
+  MCP_SETUP_GUIDE.md      ~12 KB
+  INSTALLATION.md         ~15 KB
+  PATHS_REFERENCE.txt     ~8 KB
+
+Total Size (scripts + configs + docs): ~52 KB
+
+┌───────────────────────────────────────────────────────────────────────────────┐
+│ ⭐ KEY FEATURES                                                                │
+└───────────────────────────────────────────────────────────────────────────────┘
+
+INSTALLATION SYSTEM:
+  ✓ Fully automated installation
+  ✓ Comprehensive verification (10 tests)
+  ✓ Colorful, user-friendly output
+  ✓ Error handling at each step
+  ✓ Safe to run multiple times
+  ✓ Works on Linux, Mac, Windows (WSL)
+
+CONFIGURATION:
+  ✓ Pre-configured for 4+ MCP clients
+  ✓ Copy-paste ready configs
+  ✓ Windows-compatible paths
+  ✓ Environment variable support
+  ✓ Quick reference guide
+
+DOCUMENTATION:
+  ✓ 3 comprehensive guides
+  ✓ Step-by-step instructions
+  ✓ Troubleshooting sections
+  ✓ Quick reference sheets
+  ✓ Copy-paste examples
+
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                                                                               ║
+║                        COMPLETE SETUP SYSTEM                                  ║
+║                                                                               ║
+║  Everything you need to install, configure, and run the                       ║
+║  Fusion 360 MCP Server in under 2 minutes!                                    ║
+║                                                                               ║
+║  Next Steps:                                                                  ║
+║    1. Run: ./install.sh                                                       ║
+║    2. Test: ./test_installation.sh                                            ║
+║    3. Configure: See MCP_SETUP_GUIDE.md                                       ║
+║    4. Start: ./start.sh                                                       ║
+║                                                                               ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+Version: 2.0
+Status: Production Ready ✅
+Location: /home/lubas/TOOLS/adk_API/

@@ -1,0 +1,14 @@
+{
+  "_comment": "Windows configuration - Update paths as needed",
+  "mcpServers": {
+    "fusion360-api": {
+      "command": "C:\\Users\\YourUser\\TOOLS\\adk_API\\venv\\Scripts\\python.exe",
+      "args": [
+        "C:\\Users\\YourUser\\TOOLS\\adk_API\\fusion_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONUNBUFFERED": "1"
+      }
+    }
+  }
+}
